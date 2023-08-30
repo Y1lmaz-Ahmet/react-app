@@ -1,32 +1,51 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
-
-function GithubUser({ name, location, avatar }) {
+import { Link, Outlet } from "react-router-dom";
+export function Home() {
   return (
     <div>
-      <h1>{name}</h1>
-      <p>{location}</p>
-      <img src={avatar} alt="github account's avatar picture" height={150} />
+      <nav>
+        <Link to='/'>Home</Link>
+        <Link to='/about'>About</Link>
+        <Link to='/contact'>contact</Link>
+      </nav>
+      <h1>my website</h1>
+    </div>
+  );
+}
+export function About() {
+  return (
+    <div>
+      <nav>
+        <Link to='/'>Home</Link>
+        <Link to='/about'>About</Link>
+        <Link to='/contact'>contact</Link>
+      </nav>
+      <h1>about us</h1>
+      <Outlet />
+    </div>
+  );
+}
+export function History() {
+  return (
+    <div>
+      <h1>Our History</h1>
+    </div>
+  );
+}
+export function Contact() {
+  return (
+    <div>
+      <nav>
+        <Link to='/'>Home</Link>
+        <Link to='/about'>About</Link>
+        <Link to='/contact'>contact</Link>
+      </nav>
+      <h1>Contact us</h1>
     </div>
   );
 }
 function App() {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    fetch(`https://api.github.com/users/y1lmaz-ahmet`)
-      .then((response) => response.json())
-      .then(setData);
-  }, []);
-  if (data)
-    return (
-      <GithubUser
-        name={data.name}
-        location={data.location}
-        avatar={data.avatar_url}
-      />
-    );
-
-  return <h1>DATA:</h1>;
+  return <Home />;
 }
 
 export default App;
