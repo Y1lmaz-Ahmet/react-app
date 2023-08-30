@@ -1,21 +1,23 @@
 import "./App.css";
-import { useReducer } from "react";
+import { useRef } from "react";
 
 function App() {
-  const [checked, setChecked] = useReducer((checked) => !checked, false);
-  console.log(checked);
+  const textTitle = useRef();
+  const hexColor = useRef();
+  const submitForm = (e) => {
+    e.preventDefault();
+    const title = textTitle.current.value;
+    const color = hexColor.current.value;
+    alert(`title:${title} color:${color}`);
+    textTitle.current.value = "";
+    hexColor.current.value = "";
+  };
   return (
-    <div className='App'>
-      <div>
-        <input
-          type='checkbox'
-          id='checkbox'
-          value={checked}
-          onChange={setChecked}
-        />
-        <label htmlFor='checkbox'>{checked ? "checked" : "not checked"}</label>
-      </div>
-    </div>
+    <form onSubmit={submitForm}>
+      <input type='text' placeholder='color title...' ref={textTitle} />
+      <input type='color' ref={hexColor} />
+      <button>add</button>
+    </form>
   );
 }
 
